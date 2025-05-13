@@ -1,7 +1,0 @@
-"./Src/EXTI_prog.o"
-"./Src/GPIO_prog.o"
-"./Src/SysCfg_prog.o"
-"./Src/main.o"
-"./Src/syscalls.o"
-"./Src/sysmem.o"
-"./Startup/startup_stm32f446retx.o"
