@@ -1,0 +1,56 @@
+/*
+ * SysCfg_interface.h
+ *
+ *  Created on: May 10, 2025
+ *       Author: Mai El Shahed
+ */
+
+#ifndef SYSCFG_INTERFACE_H_
+#define SYSCFG_INTERFACE_H_
+/***********************************************
+ * @port_t enum
+ *
+ *
+ */
+typedef enum{
+	PORTA=0,
+	PORTB,
+	PORTC,
+	PORTD,
+	PORTE,
+	PORTF,
+	PORTG,
+	PORTH
+}port_t;
+/***************************************************/
+
+
+
+
+typedef enum{
+	PIN0,
+	PIN1,
+	PIN2,
+	PIN3,
+	PIN4,
+	PIN5,
+	PIN6,
+	PIN7,
+PIN8,
+PIN9,
+PIN10,
+PIN11,
+PIN12,
+PIN13,
+PIN14,
+PIN15,
+
+
+}SYCCFG_LineNum;
+
+
+
+void SYSCFG_EXTILineConfig(port_t port,pin_t pin);
+
+
+#endif /* SYSCFG_INTERFACE_H_ */

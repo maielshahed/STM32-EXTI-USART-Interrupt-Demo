@@ -1,0 +1,17 @@
+15:11:07 **** Incremental Build of configuration Debug for project EXTI ****
+make -j4 all 
+arm-none-eabi-gcc "../Src/SysCfg_prog.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/SysCfg_prog.d" -MT"Src/SysCfg_prog.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/SysCfg_prog.o"
+arm-none-eabi-gcc -o "EXTI.elf" @"objects.list"   -mcpu=cortex-m4 -T"I:\advanced embedded\stm32cbeworkspace\NVIC\EXTI\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="EXTI.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: EXTI.elf
+ 
+arm-none-eabi-size  EXTI.elf 
+arm-none-eabi-objdump -h -S EXTI.elf  > "EXTI.list"
+   text	   data	    bss	    dec	    hex	filename
+    712	      0	   1568	   2280	    8e8	EXTI.elf
+Finished building: default.size.stdout
+ 
+Finished building: EXTI.list
+ 
+
+15:11:08 Build Finished. 0 errors, 0 warnings. (took 889ms)
+

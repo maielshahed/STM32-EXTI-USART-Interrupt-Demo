@@ -1,0 +1,24 @@
+/*
+ * SysCfg_prog.c
+ *
+ *  Created on: May 10, 2025
+ *      Author: Mai El Shahed
+ */
+
+
+#include <stdint.h>
+#include <stddef.h>
+
+#include "Stm32F446xx.h"
+#include "errtype.h"
+#include ""
+void SYSCFG_EXTILineConfig(port_t port,SYCCFG_LineNum pin){
+    uint8_t regIndex = pin / 4;
+    uint8_t position = (pin % 4) * 4;
+
+    // Clear the old 4 bits
+    SYSCFG->EXTICR[regIndex] &= ~(0xF << position);
+
+    // Put the port number in the correct place
+    SYSCFG->EXTICR[regIndex] |= (port << position);
+}

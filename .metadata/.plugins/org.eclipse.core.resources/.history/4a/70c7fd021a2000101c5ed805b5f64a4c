@@ -1,0 +1,21 @@
+/*
+ * NVIC_prog.c
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: Mai El Shahed
+ */
+
+#include "NVIC_interface.h"
+
+
+
+
+void ENABLE_interrupt(uint8_t IRQNUM){
+	uint8_t RegNum=IRQNUM/23;
+	uint8_t BitNum=IRQNUM%23;
+	NVIC->ISER[RegNum]=(1<<BitNum);
+
+
+}
+
+

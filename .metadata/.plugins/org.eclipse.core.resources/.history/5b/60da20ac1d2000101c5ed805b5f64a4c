@@ -1,0 +1,43 @@
+/*
+ * NVIC_interface.h
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: Mai El Shahed
+ */
+
+
+
+
+#ifndef NVIC_INTERFACE_H_
+#define NVIC_INTERFACE_H_
+
+/*****************External interrupt/event controller (EXTI)************************************/
+enum{WWDG,PVD,TAMP_STAMP,RTC_WKUP,FLASH,RCCC,EXTI0,EXTI2,EXTI3,EXTI04,
+	DMA0,DMA1,DMA2,DMA3,DMA4,DMA5,DMA6,ADC,CAN1_TX,CAN1_RX0,
+	CAN1_RX1,CAN1_SCE,I2C1_EV=31,I2C1_ER,I2C2_EV,I2C2_ER,SPI1,
+	SPI2,USART1,USART2,USART3,SPI3=51,USART4,USART5};
+
+
+/***************Interrupt Set-enable Registers  NVIC_ISER0-NVIC_ISER7 ***********************/
+/***************Interrupt Clear-enable Registers The NVIC_ICER0-NVIC_ICER7**************************************/
+
+/*read    &   Write:0 = no effect*/
+/*************** Interrupt Set-pending Registers The NVIC_ISPR0-NVIC_ISPR7********/
+/*read    &  Write:0 = no effect-----  1 = changes interrupt state to pending*/
+
+/***************Interrupt Clear-pending Registers The NVIC_ICPR0-NCVIC_ICPR7******************/
+/*read 0=not pen  1=enable   &  Write:0 = no effect-----   1 = removes pending state an interrupt.*/
+
+/******************Interrupt Active Bit Registers The NVIC_IABR0-NVIC_IABR7************************************/
+/*  0=not   1=active interrupt*/
+
+
+
+
+
+
+enum{interrupt_disabled,enable_interrupt};
+
+
+
+#endif /* NVIC_INTERFACE_H_ */

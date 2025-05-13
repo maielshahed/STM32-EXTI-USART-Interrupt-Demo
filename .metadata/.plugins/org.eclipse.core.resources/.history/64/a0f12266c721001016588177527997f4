@@ -1,0 +1,65 @@
+/*
+ * NVIC_prog.c
+ *
+ *  Created on: Apr 19, 2025
+ *      Author: Mai El Shahed
+ */
+
+
+#include <stdint.h>
+#include <stddef.h>
+
+#include "NVIC_interface.h"
+#include "Stm32F446xx.h"
+#include "errtype.h"
+
+
+
+uint8_t ENABLE_interrupt(uint8_t IRQNUM){
+	uint8_t local_u8errorstate=OK;
+
+	uint8_t RegNum=IRQNUM/32;
+	uint8_t BitNum=IRQNUM%32;
+
+	if( IRQNUM < 96 ){
+		NVIC->ISER[RegNum]=(1<<BitNum);
+	}else{
+		 local_u8errorstate= NOK;
+	}
+
+	return local_u8errorstate;
+
+}
+
+
+uint8_t DISABLED_interrupt(uint8_t IRQNUM){
+	uint8_t local_u8errorstate=OK;
+
+	uint8_t RegNum=IRQNUM/32;
+	uint8_t BitNum=IRQNUM%32;
+
+	if(IRQNUM < 96){
+		NVIC->ICER[RegNum]=(1<<BitNum);
+	}else{
+		 local_u8errorstate= NOK;
+	}
+
+	return local_u8errorstate;
+
+}
+
+uint8_t SET_Pendin7gFlag(uint8_t IRQNUM){
+
+	uint8_t local_u8errorstate=OK;
+
+		uint8_t RegNum=IRQNUM/32;
+		uint8_t BitNum=IRQNUM%32;
+
+		if(IRQNUM < 96){
+			NVIC->ICER[RegNum]=(1<<BitNum);
+		}else{
+			 local_u8errorstate= NOK;
+		}
+
+		return local_u8errorstate;
+}

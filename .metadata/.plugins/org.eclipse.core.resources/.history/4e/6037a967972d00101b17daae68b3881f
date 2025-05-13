@@ -1,0 +1,75 @@
+/*
+ * EXTI_interface.h
+ *
+ *  Created on: May 9, 2025
+ *      Author: RS3
+ */
+
+#ifndef EXTI_INTERFACE_H_
+#define EXTI_INTERFACE_H_
+
+typedef enum{
+	PIN0,
+	PIN1,
+	PIN2,
+	PIN3,
+	PIN4,
+	PIN5,
+	PIN6,
+	PIN7,
+PIN8,
+PIN9,
+PIN10,
+PIN11,
+PIN12,
+PIN13,
+PIN14,
+PIN15,
+
+
+}EXTI_LineNum;
+
+
+
+
+typedef enum{
+ FALLING_EDGE ,
+ RISING_EDGE  ,
+ FALLING_RISING_EDGES
+
+}EXTI_trigger ;
+
+
+typedef enum{
+	Enabled ,
+	Disabled
+
+}EXTI_InitState_t ;
+
+
+typedef struct{
+	EXTI_LineNum PinNum;
+	EXTI_trigger trigSrc;
+	EXTI_InitState_t  InitState;
+	void (*CallBackFunc)(void);
+}EXTI_config_t;
+
+uint8_t EXTI_u8Init(EXTI_config_t* copy_conf);
+
+
+uint8_t EXTI_u8SetTrigSrc(EXTI_trigger copy_TrigSrc,EXTI_LineNum copy_PinNum);
+
+uint8_t EXTI_u8EnableInt(EXTI_LineNum Copy_Line);
+uint8_t EXTI_u8DisableInt(EXTI_LineNum Copy_Line);
+
+
+uint8_t EXTI_u8ClearPendingFlag(EXTI_LineNum Copy_Line);
+uint8_t EXTI_u8GetPendingFlag(EXTI_LineNum Copy_Line,  uint8_t *copy_FlagState);
+
+
+
+
+
+
+
+#endif /* EXTI_INTERFACE_H_ */

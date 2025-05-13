@@ -1,0 +1,120 @@
+/*
+ * EXTI_prog.c
+ *
+ *  Created on: May 9, 2025
+ *      Author: RS3
+ */
+
+
+#include <stdint.h>
+#include <stddef.h>
+#include "Stm32F446xx.h"
+#include "errtype.h"
+#include "EXTI_interface.h"
+
+
+/*Global array of pointer to function to hold callback function*/
+
+static void (*EXTI_CallBaclFunc[16])(void)={NULL};
+
+uint8_t EXTI_u8Init(EXTI_config_t* copy_conf){
+	uint8_t Localu8ErrorState=OK;
+
+	if(copy_conf != NULL){
+
+
+		/* We choose the type of edge*/
+
+		switch(copy_conf -> trigSrc){
+		/*Falling edge*/
+		case FALLING_EDGE:
+			EXTI->FTSR |= 1<<  (copy_conf ->PinNum);
+			EXTI->RTSR &= (~(1<<  (copy_conf ->PinNum)));
+		break;
+		/* Rising edge */
+		case RISING_EDGE :
+			EXTI->RTSR |= 1<<  (copy_conf ->PinNum);
+			EXTI->FTSR &=(~( 1<<  (copy_conf ->PinNum)));
+
+			break;
+
+		case  FALLING_RISING_EDGES:
+			EXTI->FTSR |= 1<<  (copy_conf ->PinNum);
+			EXTI->RTSR |= 1<<  (copy_conf ->PinNum);  /* Enable both*/
+			break;
+		default: Localu8ErrorState=NOK; break;
+		}
+
+		/*Enable /Disabled  interrupt for the specified EXTI line*/
+		if (copy_conf ->InitState == Enabled ){
+
+				     EXTI->IMR |=  (1 << (copy_conf->PinNum));  /* Interrupt mask Enable*/
+
+		}else if(copy_conf ->InitState == Disabled ){
+
+						EXTI->IMR &=(~ (1 << (copy_conf->PinNum)));  /*Interrupt Disabled */
+		}else{
+			Localu8ErrorState=NOK;
+		}
+
+
+
+		if(copy_conf->CallBackFunc != NULL){
+
+			EXTI_CallBaclFunc[copy_conf-> PinNum]=copy_conf->CallBackFunc;
+		}
+
+	}else{
+		Localu8ErrorState=NULL_PTR_ERR;
+
+	}
+
+	return Localu8ErrorState;
+
+
+}
+
+uint8_t EXTI_u8SetTrigSrc(EXTI_trigger copy_TrigSrc,EXTI_LineNum copy_PinNum){
+	uint8_t Localu8ErrorState=OK;
+
+
+	switch(copy_TrigSrc){
+	/*Falling edge*/
+	case FALLING_EDGE:
+		EXTI->FTSR |= 1<< (copy_PinNumm);
+		EXTI->RTSR &= (~(1<<  (copy_PinNum)));
+	break;
+	/* Rising edge */
+	case RISING_EDGE :
+		EXTI->RTSR |= 1<<  (copy_PinNum);
+		EXTI->FTSR &=(~( 1<<  (copy_PinNum)));
+
+		break;
+
+	case  FALLING_RISING_EDGES:
+		EXTI->FTSR |= 1<<  (copy_PinNum);
+		EXTI->RTSR |= 1<<  (copy_PinNum);  /* Enable both*/
+		break;
+
+	default: Localu8ErrorState=NOK;
+
+	break;
+	}
+
+	return Localu8ErrorState;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
